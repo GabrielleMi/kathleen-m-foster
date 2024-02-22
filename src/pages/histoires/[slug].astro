@@ -1,0 +1,98 @@
+---
+import DocumentBase from "../../layout/DocumentBase.astro";
+import AdBigBox from "../../components/ads/AdBigBox.astro";
+import AdLeaderboard from "../../components/ads/AdLeaderboard.astro";
+import { contentfulClient } from "../../lib/contentful";
+import { BLOCKS } from '@contentful/rich-text-types';
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
+
+export async function getStaticPaths() {
+    const stories = await contentfulClient.getEntries({
+        content_type: "story",
+    });
+
+    return stories.items.map((story) => ({
+        params: {
+            slug: story.fields.slug
+        },
+        props: {
+            story: story
+        }
+    }));
+}
+
+const { story } = Astro.props;
+const cover = story.fields.cover;
+
+// @ts-ignore
+// const otherStories = await contentfulClient.getEntries({
+//     content_type: "story",
+//     "sys.id[nin]": story.sys.id
+// });
+
+const documentStrOptions = {
+    renderNode: {
+        [BLOCKS.EMBEDDED_ASSET]: (node) => {
+            return `<img alt="${node.data.target.fields.description}" src="https:${node.data.target.fields.file.url}" />`
+        }
+    }
+}
+
+---
+<DocumentBase title={story.fields.title}>
+    <Fragment slot="subtitle">{story.fields.subtitle}</Fragment>
+    {cover &&
+        <figure class="mb-16 container uppercase">
+            <img src={`https:${cover.fields.file.url}`} alt={cover.fields.description} class="w-full" />
+            <figcaption class="text-right text-sm"><span class="opacity-50">Généré par</span> <a href="https://www.midjourney.com/" class="underline opacity-50 hover:opacity-100" target="_blank" rel="noopener noreferrer">Midjourney</a></figcaption>
+        </figure>
+    }
+    <section class="container flex pb-16 border-b-2 items-center">
+        <blockquote cite="content" class="uppercase w-full text-xl">
+            <b class="text-8xl leading-[1.25rem] font-[sans-serif] align-bottom">“</b>{story.fields.quote}<b class="align-top text-8xl font-[sans-serif]">”</b>
+        </blockquote>
+        <div class="ml-16 pl-16 flex-shrink-0 border-l-2">
+            <AdBigBox />
+        </div>
+    </section>
+    <main class="py-16">
+        <div
+            id="content"
+            class="text-justify w-[600px] story-content container tracking-normal pb-16"
+            set:html={documentToHtmlString(story.fields.content, documentStrOptions)}
+        />
+        <aside class="container flex justify-center pb-16">
+            <AdLeaderboard />
+        </aside>
+        <footer class="text-8xl font-extrabold container text-center pb-16 border-b-2">
+            FIN
+        </footer>
+    </main>
+    <section class="flex flex-row-reverse pb-16 container uppercase">
+        <h2 class="text-8xl font-bold border-l-2 pl-10 text-right">Sugges<br />tions.</h2>
+        <div class="flex-grow flex gap-8 pr-10">
+            <div class="aspect-square bg-black flex-grow" />
+            <div class="aspect-square bg-black flex-grow" />
+            <div class="aspect-square bg-black flex-grow" />
+        </div>
+    </section>
+</DocumentBase>
+<style is:global>
+    .story-content {
+        font-size: 1.2rem;
+    }
+    .story-content p {
+        margin-bottom: 1rem;
+    }
+    .story-content img {
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+        width: 100%;
+    }
+    .story-content p:first-child::first-letter {
+        font-size: 6rem;
+        font-weight: 800;
+        vertical-align: baseline;
+        line-height: 1rem;
+    }
+</style>
