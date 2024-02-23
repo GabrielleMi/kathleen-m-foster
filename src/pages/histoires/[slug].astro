@@ -24,12 +24,6 @@ export async function getStaticPaths() {
 const { story } = Astro.props;
 const cover = story.fields.cover;
 
-// @ts-ignore
-// const otherStories = await contentfulClient.getEntries({
-//     content_type: "story",
-//     "sys.id[nin]": story.sys.id
-// });
-
 const documentStrOptions = {
     renderNode: {
         [BLOCKS.EMBEDDED_ASSET]: (node) => {
