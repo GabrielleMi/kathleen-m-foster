@@ -8,7 +8,7 @@ export async function getStaticPaths({ paginate }) {
         content_type: "story",
     });
 
-    return paginate(stories.items, { pageSize: 1 })
+    return paginate(stories.items, { pageSize: 10 })
 }
 
 const { page } = Astro.props;
