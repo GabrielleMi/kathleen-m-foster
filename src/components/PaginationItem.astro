@@ -1,0 +1,15 @@
+---
+import Link from "./Link.astro";
+
+const { currentPage, pageNb } = Astro.props;
+const isCurrentPageNb = pageNb === currentPage;
+---
+<li class:list={[{ ["font-bold underline px-2"]: isCurrentPageNb }]}>
+    {isCurrentPageNb ?
+        pageNb
+        :
+        <Link class="px-2 hover:underline" href={`/histoires${pageNb === 1 ? "" : `/${pageNb}`}`}>
+            {pageNb}
+        </Link>
+    }
+</li>

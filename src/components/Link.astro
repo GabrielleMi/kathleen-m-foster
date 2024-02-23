@@ -1,6 +1,6 @@
 ---
 const { href, ...props } = Astro.props;
-const siteUrl = Astro.site.origin + '/kathleen-m-foster';
+const siteUrl = Astro.url.origin + '/kathleen-m-foster';
 const url = href && siteUrl && href.startsWith("/") ? (siteUrl.endsWith("/") ? siteUrl.slice(0, siteUrl.length -1) : siteUrl) + href : href;
 ---
 <a {...props} href={url}>
