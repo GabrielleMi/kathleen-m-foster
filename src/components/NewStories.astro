@@ -23,7 +23,9 @@ const displayedStories = stories.reduce((withCover, story) => {
                 i === 1 && "-translate-y-5"
             ]}
         >
-            <Link class="absolute inset-0 bg-black opacity-50 group-hover:opacity-0 transition-opacity" href={`/histoires/${story.fields.slug}`} title={story.fields.title} />
+            <Link class="absolute text-white text-xl p-3 inset-0 font-bold flex items-center justify-center bg-black opacity-0 group-hover:opacity-80 transition-opacity" href={`/histoires/${story.fields.slug}`} title={story.fields.title}>
+                {story.fields.title}
+            </Link>
         </div>
     ))}
 </div>

@@ -3,14 +3,25 @@ import NavItem from "./NavItem.astro";
 ---
 
 <footer class="bg-black text-white py-16">
-    <div class="container">
-        <h3 class="uppercase text-2xl mb-4 font-medium">
-            Pour dévorer plus de
-            <b class="text-8xl mt-4 block">Créations</b>
-        </h3>
-        <ul class="flex gap-4 text-xl">
-            <NavItem linkProps={{ title: "Instagram", class: "hover:opacity-50 hover:no-underline fa-brands fa-instagram" }} />
-            <NavItem linkProps={{ title: "Patreon", class: "hover:opacity-50 hover:no-underline fa-brands fa-patreon" }} />
-        </ul>
+    <div class="flex container items-center">
+        <div class="pr-16">
+            <h3 class="uppercase text-2xl mb-4 font-medium">
+                Pour dévorer plus de
+                <b class="text-8xl mt-4 block">Créations</b>
+            </h3>
+            <ul class="flex gap-4 text-xl">
+                <NavItem linkProps={{ title: "Instagram", class: "hover:opacity-50 hover:no-underline fa-brands fa-instagram" }} />
+                <NavItem linkProps={{ title: "Patreon", class: "hover:opacity-50 hover:no-underline fa-brands fa-patreon" }} />
+            </ul>
+        </div>
+        <div aria-hidden="true" class="border-r border-2 border-white self-stretch mx-auto" />
+        <nav class="basis-1/3 pl-16">
+            <ul class="uppercase w-full">
+                <NavItem href="/#a-propos">L'autrice</NavItem>
+                <NavItem class="text-center" href="/histoires">Lire</NavItem>
+                <NavItem class="text-right" href="/#a-propos">Soutenir</NavItem>
+                <NavItem href="/#a-propos">Contact</NavItem>
+            </ul> 
+        </nav>
     </div>
 </footer>

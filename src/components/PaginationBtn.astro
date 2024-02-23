@@ -1,0 +1,15 @@
+---
+import Link from "./Link.astro";
+import Icon from "./Icon.astro";
+
+const { href, disabled } = Astro.props;
+---
+{disabled ?
+    <button type="button" class="opacity-50" disabled>
+        <slot />
+    </button>
+    :
+    <Link href={href} class="hover:underline">
+        <slot />
+    </Link>
+}

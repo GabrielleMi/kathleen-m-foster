@@ -1,8 +1,5 @@
 ---
-import AdSkyscraper from "../components/ads/AdSkyscraper.astro";
 import DocumentBase from "../layout/DocumentBase.astro";
-import StoryPreview from "../components/StoryPreview.astro";
-import Link from "../components/Link.astro";
 import Quotes from "../components/Quotes.astro";
 import NewStories from "../components/NewStories.astro";
 import Icon from "../components/Icon.astro";
@@ -11,10 +8,14 @@ import LeftEye from "../assets/home/eye_left.png";
 import RightEye from "../assets/home/eye_right.png";
 import Photo from "../assets/home/photo_kath.png";
 import Phone from "../assets/home/phone.png";
+import StoriesList from "../components/StoriesList.astro";
 
+const storiesPerPage = 4;
 const stories = await contentfulClient.getEntries({
   content_type: "story",
+  limit: storiesPerPage
 });
+const pagesNb = Math.ceil(stories.total / storiesPerPage);
 ---
 
 <DocumentBase title="Kathleen M. Foster">
@@ -36,22 +37,14 @@ const stories = await contentfulClient.getEntries({
 		</section>
 		<section id="histoires" class="container py-16">
 			<h2 class="text-8xl uppercase border-b-2 pb-10 font-bold">Histo<br />ires.</h2>
-			<div class="flex pb-10 gap-10">
-				<ul class="w-full">
-					{stories.items.map((story) => (
-						<li class="border-b-2 flex items-center gap-5 relative group">
-							<StoryPreview story={story} />
-							<div class="text-8xl">
-								<Icon icon="keyboard_double_arrow_right" />
-							</div>
-							<Link title={story.fields.title} href={`/histoires/${story.fields.slug}`} class="absolute inset-0" />
-						</li>
-					))}
-				</ul>
-				<div class="pt-10 flex flex-col items-center flex-shrink-0">
-					<AdSkyscraper />
-				</div>
-			</div>
+			<StoriesList 
+				stories={stories.items}
+				hidePagination
+				page={{
+					total: pagesNb,
+					currentPage: 1
+				}}
+			/>
 		</section>
 		<section
 			id="soutenir"

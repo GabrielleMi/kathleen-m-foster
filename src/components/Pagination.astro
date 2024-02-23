@@ -1,0 +1,38 @@
+---
+import Icon from "./Icon.astro";
+import Link from "./Link.astro";
+import PaginationItem from "./PaginationItem.astro";
+import PaginationBtn from "./PaginationBtn.astro";
+
+const { page } = Astro.props;
+---
+<nav class="py-10 flex text-xl">
+    {page.url &&
+        <>
+            <PaginationBtn disabled={page.currentPage === 1} href="/histoires">
+                <Icon icon="first_page" />
+            </PaginationBtn>
+            <PaginationBtn disabled={page.currentPage === 1} href={`/histoires${page.currentPage === 2 ? "" : `/${page.currentPage - 1}`}`}>
+                <Icon icon="chevron_left" />
+            </PaginationBtn>
+        </>
+    }
+    <ul class="flex">
+        {Array.from({ length: page.total }).map((_, i) => (
+            <PaginationItem
+                currentPage={page.currentPage}
+                pageNb={i + 1}
+            />
+        ))}
+    </ul>
+    {page.url &&
+        <>
+            <PaginationBtn disabled={!page.url.next || page.url.next === page.currentPage} href={`/histoires/${page.currentPage + 1}`}>
+                <Icon icon="chevron_right" />
+            </PaginationBtn>
+            <PaginationBtn href={`/histoires/${page.lastPage}`} disabled={page.lastPage === page.currentPage}>
+                <Icon icon="last_page" />
+            </PaginationBtn>
+        </>
+    }
+</nav>

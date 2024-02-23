@@ -1,0 +1,24 @@
+---
+import DocumentBase from "../../layout/DocumentBase.astro";
+import { contentfulClient } from "../../lib/contentful";
+import StoriesList from "../../components/StoriesList.astro";
+
+export async function getStaticPaths({ paginate }) {
+    const stories = await contentfulClient.getEntries({
+        content_type: "story",
+    });
+
+    return paginate(stories.items, { pageSize: 1 })
+}
+
+const { page } = Astro.props;
+---
+<DocumentBase title="Histoires">
+    <Fragment slot="subtitle">Les histoires</Fragment>
+    <main class="container">
+        <StoriesList
+            page={page}
+            stories={page.data}
+        />
+    </main>
+</DocumentBase>

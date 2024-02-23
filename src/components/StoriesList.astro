@@ -1,0 +1,30 @@
+---
+import StoryPreview from "./StoryPreview.astro";
+import Icon from "./Icon.astro";
+import Link from "./Link.astro";
+import Pagination from "./Pagination.astro";
+import AdSkyscraper from "./ads/AdSkyscraper.astro";
+
+const { stories, page, hidePagination = false } = Astro.props;
+---
+<div class="flex pb-10 gap-10">
+    <div class="w-full">
+        <ul>
+            {stories.map((story) => (
+                <li class="border-b-2 flex items-center gap-5 relative group">
+                    <StoryPreview story={story} />
+                    <div class="text-8xl">
+                        <Icon icon="keyboard_double_arrow_right" />
+                    </div>
+                    <Link title={story.fields.title} href={`/histoires/${story.fields.slug}`} class="absolute inset-0" />
+                </li>
+            ))}
+        </ul>
+        {page.total > 1 && !hidePagination &&
+            <Pagination page={page} />
+        }
+    </div>
+    <aside class="pt-10 flex flex-col items-center flex-shrink-0">
+        <AdSkyscraper />
+    </aside>
+</div>

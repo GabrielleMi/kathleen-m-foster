@@ -5,6 +5,7 @@ import AdLeaderboard from "../../components/ads/AdLeaderboard.astro";
 import { contentfulClient } from "../../lib/contentful";
 import { BLOCKS } from '@contentful/rich-text-types';
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
+import Link from "../../components/Link.astro";
 
 export async function getStaticPaths() {
     const stories = await contentfulClient.getEntries({
@@ -16,12 +17,21 @@ export async function getStaticPaths() {
             slug: story.fields.slug
         },
         props: {
+            suggestions: stories.items.reduce((stories, suggestedStory) => {
+                if(stories.length < 4 && suggestedStory.sys.id !== story.sys.id) {
+                    stories.push({
+                        coverUrl: suggestedStory.fields.cover?.fields?.file.url,
+                        ...suggestedStory
+                    });
+                }
+                return stories;
+            }, []),
             story: story
         }
     }));
 }
 
-const { story } = Astro.props;
+const { story, suggestions } = Astro.props;
 const cover = story.fields.cover;
 
 const documentStrOptions = {
@@ -64,11 +74,25 @@ const documentStrOptions = {
     </main>
     <section class="flex flex-row-reverse pb-16 container uppercase">
         <h2 class="text-8xl font-bold border-l-2 pl-10 text-right">Sugges<br />tions.</h2>
-        <div class="flex-grow flex gap-8 pr-10">
-            <div class="aspect-square bg-black flex-grow" />
-            <div class="aspect-square bg-black flex-grow" />
-            <div class="aspect-square bg-black flex-grow" />
-        </div>
+        <ul class="flex-grow flex gap-8 pr-10">
+            {suggestions.map((suggestedStory) => (
+                <li class="flex-grow">
+                    <Link 
+                        href={`/histoires/${suggestedStory.fields.slug}`}
+                        style={`background-image:url(https:${suggestedStory.coverUrl});background-size:cover;`}
+                        class:list={[
+                            "hover:bg-center block h-full transition-[background-position]",
+                            "aspect-square relative group",
+                            "after:bg-black after:absolute after:inset-0 after:opacity-20 hover:after:opacity-80"
+                        ]}
+                    >
+                        <b class="absolute text-3xl z-10 inset-0 p-6 flex items-center opacity-0 group-hover:opacity-100 text-white justify-center">
+                            {suggestedStory.fields.title}
+                        </b>
+                    </Link>
+                </li>
+            ))}
+        </ul>
     </section>
 </DocumentBase>
 <style is:global>
