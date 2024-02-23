@@ -9,8 +9,7 @@ on:
   # workflow_dispatch:
   # Allows external webhook trigger
   repository_dispatch:
-    types:
-      - webhook
+    types: [webhook]
 
 permissions:
   contents: read
@@ -18,13 +17,13 @@ permissions:
   id-token: write
 
 jobs:
-  pre-job:
-    name: Pre-job
-    runs-on: ubuntu-latest
-    steps:
-      - uses: technote-space/auto-cancel-redundant-workflow@v1
-      - name: Cancel redundant workflows
-        run: echo "Cancel redundant workflows finished"
+  # pre-job:
+  #   name: Pre-job
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: technote-space/auto-cancel-redundant-workflow@v1
+  #     - name: Cancel redundant workflows
+  #       run: echo "Cancel redundant workflows finished"
   build:
     runs-on: ubuntu-latest
     env:
