@@ -1,4 +1,6 @@
 ---
+import Link from "./Link.astro";
+
 const { stories } = Astro.props;
 const initQuote = stories[0];
 const dataQuotes = stories.map(({ fields }) => ({ slug: fields.slug, title: fields.title, quote: fields.quote }));
@@ -21,7 +23,7 @@ const dataQuotes = stories.map(({ fields }) => ({ slug: fields.slug, title: fiel
                     "hover:before:w-10"
                 ]}
             >
-            <a href={`/histoires/${initQuote.fields.slug}`}>{initQuote.fields.title}</a>
+            <Link href={`/histoires/${initQuote.fields.slug}`}>{initQuote.fields.title}</a>
             </cite>
         </blockquote>
     </div>
