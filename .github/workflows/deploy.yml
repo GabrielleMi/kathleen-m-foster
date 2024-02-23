@@ -6,10 +6,11 @@ on:
   push:
     branches: [ main ]
   # Allows you to run this workflow manually from the Actions tab on GitHub.
-  # workflow_dispatch:
+  workflow_dispatch:
   # Allows external webhook trigger
-  repository_dispatch:
-    types: [webhook]
+  # repository_dispatch:
+  #   types:
+  #     - webhook
 
 permissions:
   contents: read
