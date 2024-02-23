@@ -1,0 +1,29 @@
+---
+import Link from "./Link.astro";
+
+const { stories } = Astro.props;
+const displayedStories = stories.reduce((withCover, story) => {
+    if(story.fields.cover?.fields.file?.url && withCover.length < 4) {
+        withCover.push({
+            ...story,
+            coverUrl: story.fields.cover.fields.file.url
+        })
+    }
+
+    return withCover;
+}, []);
+---
+<div class="flex-grow relative flex">
+    {displayedStories.map((story, i) => (
+        <div 
+            style={`background-image:url(https:${story.coverUrl});background-size:cover;`}
+            class:list={[
+                "bg-black group relative bg-left hover:bg-center transition-[background-position] shadow aspect-[2/3] w-1/3",
+                i > 0 && "-translate-x-1",
+                i === 1 && "-translate-y-5"
+            ]}
+        >
+            <Link class="absolute inset-0 bg-black opacity-50 group-hover:opacity-0 transition-opacity" href={`/histoires/${story.fields.slug}`} title={story.fields.title} />
+        </div>
+    ))}
+</div>

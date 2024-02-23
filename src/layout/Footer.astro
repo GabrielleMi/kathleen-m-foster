@@ -1,0 +1,16 @@
+---
+import NavItem from "./NavItem.astro";
+---
+
+<footer class="bg-black text-white py-16">
+    <div class="container">
+        <h3 class="uppercase text-2xl mb-4 font-medium">
+            Pour dévorer plus de
+            <b class="text-8xl mt-4 block">Créations</b>
+        </h3>
+        <ul class="flex gap-4 text-xl">
+            <NavItem linkProps={{ title: "Instagram", class: "hover:opacity-50 hover:no-underline fa-brands fa-instagram" }} />
+            <NavItem linkProps={{ title: "Patreon", class: "hover:opacity-50 hover:no-underline fa-brands fa-patreon" }} />
+        </ul>
+    </div>
+</footer>

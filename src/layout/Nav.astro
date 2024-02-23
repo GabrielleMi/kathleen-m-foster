@@ -1,0 +1,30 @@
+---
+import NavItem from "./NavItem.astro";
+---
+
+<nav class="bg-black text-white">
+    <div class="flex container text-xl uppercase gap-8 py-3">
+        <ul class="flex-1 flex gap-4">
+            <NavItem linkProps={{ title: "Instagram", class: "hover:opacity-50 hover:no-underline fa-brands fa-instagram" }} />
+            <NavItem linkProps={{ title: "Patreon", class: "hover:opacity-50 hover:no-underline fa-brands fa-patreon" }} />
+        </ul>
+        <ul class="flex justify-center gap-8">
+            <NavItem href="/">
+                Accueil
+            </NavItem>
+            <NavItem href="/#a-propos">
+                L'auteur
+            </NavItem>
+            <NavItem href="/#contact">
+                Discuter
+            </NavItem>
+        </ul>
+        <NavItem
+            href="/#histoires"
+            class="block text-right flex-1"
+            linkProps={{ class: "border hover:bg-white hover:text-black border-white px-3" }}
+        >
+            Lire
+        </NavItem>
+    </div>
+</nav>

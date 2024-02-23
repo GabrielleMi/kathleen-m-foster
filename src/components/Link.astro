@@ -1,0 +1,9 @@
+---
+const { href, ...props } = Astro.props;
+const siteUrl = Astro.url.href;
+const url = href && siteUrl && href.startsWith("/") ? (siteUrl.endsWith("/") ? siteUrl.slice(0, siteUrl.length -1) : siteUrl) + href : href;
+
+---
+<a {...props} href={url}>
+    <slot />
+</a>

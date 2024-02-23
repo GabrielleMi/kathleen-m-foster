@@ -1,0 +1,10 @@
+---
+import Link from "../components/Link.astro";
+
+const { href, linkProps = {}, ...props } = Astro.props;
+---
+<li {...props}>
+    <Link href={href} {...linkProps} class:list={[ linkProps.class, "inline-block hover:underline cursor-pointer" ]}>
+        <slot />
+    </Link>
+</li>

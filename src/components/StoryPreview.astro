@@ -1,0 +1,18 @@
+---
+import Icon from "./Icon.astro";
+
+const { story } = Astro.props;
+---
+<article class="py-10 group cursor-pointer">
+    <p class="uppercase"><Icon icon="star" /> Recommandée</p>
+    <h3 class="text-4xl mb-5 uppercase font-bold group-hover:underline">{story.fields.title}</h3>
+    <p class="tracking-normal mb-5 group-hover:underline">
+        {story.fields.summary}
+    </p>
+    <footer>
+        <Icon icon="visibility" /> 12
+        <Icon icon="favorite" /> 12
+        <Icon icon="insert_comment" /> 12
+        <Icon icon="share" /> 12
+    </footer>
+</article>

@@ -1,0 +1,34 @@
+---
+import Nav from "./Nav.astro";
+import Footer from "./Footer.astro";
+
+const { title } = Astro.props;
+---
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/png" href="/favicon.png" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title === "Kathleen M. Foster" ? title : `Kathleen M. Foster | ${title}`}</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/brands.min.css" integrity="sha512-8RxmFOVaKQe/xtg6lbscU9DU0IRhURWEuiI0tXevv+lXbAHfkpamD4VKFQRto9WgfOJDwOZ74c/s9Yesv3VvIQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	</head>
+	<body class="tracking-widest">
+        <Nav />
+        <header class="uppercase container">
+            <h1 class="border-b-2 py-10 text-8xl text-center font-extrabold">{title}</h1>
+            <p class="text-center py-10"><slot name="subtitle" /></p>
+        </header>
+        <slot />
+        <Footer />
+	</body>
+</html>
+<style is:global>
+    .fa-brands {
+        font: var(--fa-font-brands);
+    }
+</style>
