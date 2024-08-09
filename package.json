@@ -12,7 +12,7 @@
   "dependencies": {
     "@astrojs/tailwind": "^5.1.0",
     "@contentful/rich-text-html-renderer": "^16.6.8",
-    "astro": "^4.13.0",
+    "astro": "^4.13.2",
     "contentful": "^10.13.1",
     "tailwindcss": "^3.4.7"
   },
