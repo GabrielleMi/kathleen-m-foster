@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+    --color-*: initial;
+    --color-current: currentColor;
+    --color-inherit: inherit;
+    --color-black: #000000;
+    --color-white: #ffffff;
+
+    --font-sans: 'Roboto Condensed', sans-serif;
+}

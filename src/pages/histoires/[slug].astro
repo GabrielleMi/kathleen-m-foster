@@ -46,12 +46,12 @@ const documentStrOptions = {
 <DocumentBase title={story.fields.title}>
     <Fragment slot="subtitle">{story.fields.subtitle}</Fragment>
     {cover &&
-        <figure class="mb-16 container uppercase">
+        <figure class="mb-16 container mx-auto uppercase">
             <img src={`https:${cover.fields.file.url}`} alt={cover.fields.description} class="w-full" />
             <figcaption class="text-right text-sm"><span class="opacity-50">Généré par</span> <a href="https://www.midjourney.com/" class="underline opacity-50 hover:opacity-100" target="_blank" rel="noopener noreferrer">Midjourney</a></figcaption>
         </figure>
     }
-    <section class="container flex pb-16 border-b-2 items-center">
+    <section class="container mx-auto flex pb-16 border-b-2 items-center">
         <blockquote cite="content" class="uppercase w-full text-xl">
             <b class="text-8xl leading-[1.25rem] font-[sans-serif] align-bottom">“</b>{story.fields.quote}<b class="align-top text-8xl font-[sans-serif]">”</b>
         </blockquote>
@@ -62,17 +62,17 @@ const documentStrOptions = {
     <main class="py-16">
         <div
             id="content"
-            class="text-justify w-[600px] story-content container tracking-normal pb-16"
+            class="text-justify w-[600px] story-content container mx-auto tracking-normal pb-16"
             set:html={documentToHtmlString(story.fields.content, documentStrOptions)}
         />
         <aside class="container flex justify-center pb-16">
             <AdLeaderboard />
         </aside>
-        <footer class="text-8xl font-extrabold container text-center pb-16 border-b-2">
+        <footer class="text-8xl font-extrabold container mx-auto text-center pb-16 border-b-2">
             FIN
         </footer>
     </main>
-    <section class="flex flex-row-reverse pb-16 container uppercase">
+    <section class="flex flex-row-reverse pb-16 container mx-auto uppercase">
         <h2 class="text-8xl font-bold border-l-2 pl-10 text-right">Sugges<br />tions.</h2>
         <ul class="flex-grow flex gap-8 pr-10">
             {suggestions.map((suggestedStory) => (

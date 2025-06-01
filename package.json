@@ -1,7 +1,7 @@
 {
   "name": "kathleen-m-foster",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -10,11 +10,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/tailwind": "^5.1.2",
     "@contentful/rich-text-html-renderer": "^16.6.8",
-    "astro": "^4.16.9",
-    "contentful": "^10.15.0",
-    "tailwindcss": "^3.4.14"
+    "@tailwindcss/vite": "^4.1.8",
+    "astro": "^5.8.1",
+    "contentful": "^11.5.24",
+    "tailwindcss": "^4.1.8"
   },
   "devDependencies": {
     "eslint": "^8.57.0",

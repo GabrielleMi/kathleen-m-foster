@@ -15,7 +15,7 @@ const { page } = Astro.props;
 ---
 <DocumentBase title="Histoires">
     <Fragment slot="subtitle">Les histoires</Fragment>
-    <main class="container">
+    <main class="container mx-auto">
         <StoriesList
             page={page}
             stories={page.data}

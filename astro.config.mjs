@@ -1,10 +1,11 @@
 import { defineConfig } from 'astro/config';
 
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from '@tailwindcss/vite';
 
-// https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind()],
   site: 'https://gabriellemi.github.io/',
-  base: '/kathleen-m-foster/'
+  base: '/kathleen-m-foster/',
+  vite: {
+    plugins: [tailwindcss()]
+  }
 });
